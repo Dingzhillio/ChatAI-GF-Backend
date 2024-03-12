@@ -25,12 +25,12 @@ const app = express()
 
 //Body parser
 app.use(express.json())
-app.use(cors());
 
 //CookieParser
 app.use(cookieParser());
 //Cors
-app.use(cors({ origin: '*' }));
+// app.use(cors({ origin: '*' }));
+app.use(cors());
 
 app.use(
     session({
