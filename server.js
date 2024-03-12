@@ -32,6 +32,9 @@ app.use(cookieParser());
 // app.use(cors({ origin: '*' }));
 app.use(cors());
 
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(
     session({
       secret: 'secret',
