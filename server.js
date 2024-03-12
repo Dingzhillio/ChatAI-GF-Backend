@@ -60,6 +60,6 @@ app.use('/', mainRoute);
 const PORT = process.env.PORT || 4000;
 app.listen(
     PORT, console.log(
-        `Server running in ${process.env.NODE_ENV}mode on port http://localhost:${PORT}`
+        `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
     )
 )
