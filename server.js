@@ -25,6 +25,7 @@ const app = express()
 
 //Body parser
 app.use(express.json())
+app.use(cors());
 
 //CookieParser
 app.use(cookieParser());
