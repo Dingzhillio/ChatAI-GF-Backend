@@ -3,9 +3,9 @@ import asyncHandler from "express-async-handler";
 import { createWriteStream, write } from "fs";
 import ChatHistory from "../models/chatHistoryModel.js";
 import Character from "../models/chtModel.js";
-// import { OpenAI } from "langchain/llms/openai";
+import { OpenAI } from "@langchain/openai";
 import "@langchain/openai";
-// import { PromptTemplate } from "langchain/prompts";
+import { PromptTemplate } from "@langchain/core/prompts";
 import "@langchain/core/prompts"
 import { LLMChain } from "langchain/chains";
 import path from "path";
@@ -24,8 +24,8 @@ const createHistory = asyncHandler(async (req, res) => {
 });
 
 const fetchChats = asyncHandler(async (req, res) => {
-  const { cht_id } = req.body;
-  const chathistory = await ChatHistory.find({ cht_id: cht_id });
+  const { user_id, cht_id } = req.body;
+  const chathistory = await ChatHistory.find({ user_id: user_id, cht_id: cht_id });
   if (chathistory) {
     res.status(200).json({ history: chathistory });
   }
