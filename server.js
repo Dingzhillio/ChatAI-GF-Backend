@@ -42,10 +42,10 @@ app.use(
       saveUninitialized: true
     })
 );
-app.use('/', mainRoute);
+
 //API routes
 app.use('/', authRoute);
-
+app.use('/', mainRoute);
 
 
 
