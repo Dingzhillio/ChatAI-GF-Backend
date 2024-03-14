@@ -11,6 +11,7 @@ const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
 const stripe_pay = asyncHandler(async (req, res) => {
   const plan_id = req.query.plan_id;
   const user_id = req.query.user_id;
+  console.log("stripe pay ok")
   const plan_info = await MembershipPlan.findById(plan_id);
   // console.log(plan_info)
 
