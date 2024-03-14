@@ -29,8 +29,8 @@ app.use(express.json())
 //CookieParser
 app.use(cookieParser());
 //Cors
-// app.use(cors({ origin: '*' }));
-app.use(cors());
+app.use(cors({ origin: '*' }));
+// app.use(cors());
 
 // Handle preflight requests
 app.options('*', cors());
@@ -42,10 +42,10 @@ app.use(
       saveUninitialized: true
     })
 );
-
+app.use('/', mainRoute);
 //API routes
 app.use('/', authRoute);
-app.use('/', mainRoute);
+
 
 
 
