@@ -1,53 +1,52 @@
-import path from 'path';
-import cors from 'cors';
-import express from 'express';
-import connectDB from './src/config/db.js';
-import authRoute from './src/routes/authRoutes.js';
-import dotenv from 'dotenv';
-import mainRoute from './src/routes/mainRoutes.js';
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
+import path from "path";
+import cors from "cors";
+import express from "express";
+import connectDB from "./src/config/db.js";
+import authRoute from "./src/routes/authRoutes.js";
+import dotenv from "dotenv";
+import mainRoute from "./src/routes/mainRoutes.js";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import {createProxyMiddleware} from "http-proxy-middleware";
 
 // const path = require('path');
 // app.use(express.static(path.join(__dirname, 'public')));
 
 const __dirname = path.resolve;
 
-dotenv.config()
+dotenv.config();
 
-if(process.env.NODE_ENV === undefined) {
-    dotenv.config({ path: '.env'})
+if (process.env.NODE_ENV === undefined) {
+  dotenv.config({ path: ".env" });
 }
 
 connectDB();
 
-const app = express()
+const app = express();
 
 //Body parser
-app.use(express.json())
+app.use(express.json());
 
 //CookieParser
 app.use(cookieParser());
 //Cors
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: "*" }));
 // app.use(cors());
 
 // Handle preflight requests
-app.options('*', cors());
+app.options("*", cors());
 
 app.use(
-    session({
-      secret: 'secret',
-      resave: false,
-      saveUninitialized: true
-    })
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+  })
 );
 
 //API routes
-app.use('/', authRoute);
-app.use('/', mainRoute);
-
-
+app.use("/", authRoute);
+app.use("/", mainRoute);
 
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static(path.join(__dirname, '/frontend/build')))
@@ -59,7 +58,8 @@ app.use('/', mainRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(
-    PORT, console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
-    )
-)
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+  )
+);
