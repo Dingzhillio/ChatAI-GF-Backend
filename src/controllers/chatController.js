@@ -35,6 +35,7 @@ const botRes = asyncHandler(async (req, res) => {
   const { user_id, cht_id, msg, send } = req.body;
 
   const characterInfo = await Character.findOne({ cht_id: cht_id });
+
   if (characterInfo) {
     const prompt_text = characterInfo.prompt;
     var history = "";
@@ -51,6 +52,7 @@ const botRes = asyncHandler(async (req, res) => {
       template: template,
     });
     const max_len = 100;
+
     const chatgptChain = new LLMChain({
       llm: new OpenAI({
         modelName: "gpt-3.5-turbo",
